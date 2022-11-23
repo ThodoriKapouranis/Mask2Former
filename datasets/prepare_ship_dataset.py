@@ -4,8 +4,6 @@ import getopt
 import sys
 from absl import flags, app
 import re
-from detectron2.data.datasets import register_coco_instances
-from detectron2.data import DatasetCatalog, MetadataCatalog
 '''
 Example Run:
 python datasets/prepare_ship_dataset.py --path='/workspaces/final-dl/datasets/ShipRSImageNet_V1'
@@ -70,34 +68,6 @@ def initialize_new_dir(formatted_dir):
                
 if __name__ == "__main__":
   app.run(main)
-  print("Is this running")
-  dataset = 'datasets/ShipRSImageNet'
-  
-  # Test to see if dataset load properly
-  register_coco_instances(
-    "ship_train", 
-    {}, 
-    f'{dataset}/annotations/train.json',
-    f'{dataset}images'
-  )
-  
-  register_coco_instances(
-    "ship_test", 
-    {}, 
-    f'{dataset}/annotations/test.json',
-    f'{dataset}images'
-  )
-  
-  register_coco_instances(
-    "ship_val", 
-    {}, 
-    f'{dataset}/annotations/val.json',
-    f'{dataset}images'
-  )
-  
-  dataset = DatasetCatalog.get('ship_train')
-  print("Dataset \n ==========")
-  print(dataset)
   
   
   
