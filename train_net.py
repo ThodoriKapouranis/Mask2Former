@@ -59,7 +59,7 @@ from mask2former import (
 )
 
 
-class Trainer(DefaultTrainer):
+class Trainer( ):
     """
     Extension of the Trainer class adapted to MaskFormer.
     """
