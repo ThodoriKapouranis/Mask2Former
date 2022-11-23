@@ -44,7 +44,7 @@ if __name__ == "__main__":
   cfg = get_cfg()
   cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")) #Get the basic model configuration from the model zoo 
   #Passing the Train and Validation sets
-  cfg.DATASETS.TRAIN = ("my_dataset_train",)
+  cfg.DATASETS.TRAIN = ("ship_train",)
   cfg.DATASETS.TEST = ()
   # Number of data loading threads
   cfg.DATALOADER.NUM_WORKERS = 4
