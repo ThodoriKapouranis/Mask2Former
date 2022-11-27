@@ -168,7 +168,7 @@ class HungarianMatcher(nn.Module):
                  "labels": Tensor of dim [num_target_boxes] (where num_target_boxes is the number of ground-truth
                            objects in the target) containing the class labels
                  "masks": Tensor of dim [num_target_boxes, H_gt, W_gt] containing the target masks
-
+        
         Returns:
             A list of size batch_size, containing tuples of (index_i, index_j) where:
                 - index_i is the indices of the selected predictions (in order)
