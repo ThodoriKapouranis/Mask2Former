@@ -26,6 +26,7 @@ import detectron2.utils.comm as comm
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
 from detectron2.data import MetadataCatalog, build_detection_train_loader
+from detectron2.data.datasets import register_coco_instances
 from detectron2.engine import (
     DefaultTrainer,
     default_argument_parser,
@@ -59,7 +60,7 @@ from mask2former import (
 )
 
 
-class Trainer( ):
+class Trainer(DefaultTrainer):
     """
     Extension of the Trainer class adapted to MaskFormer.
     """
@@ -296,6 +297,22 @@ def setup(args):
 
 
 def main(args):
+    dataset = 'datasets/ShipRSImageNet'
+    
+    register_coco_instances(
+		"ship_train", 
+		{}, 
+		f'{dataset}/annotations/train.json',
+		f'{dataset}/images'
+	)
+	
+    register_coco_instances(
+		"ship_val", 
+		{}, 
+		f'{dataset}/annotations/val.json',
+		f'{dataset}/images'
+	)
+ 
     cfg = setup(args)
 
     if args.eval_only:

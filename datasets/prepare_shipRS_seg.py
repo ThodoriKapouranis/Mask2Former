@@ -17,7 +17,7 @@ python datasets/prepare_ship_dataset.py --path='/workspaces/final-dl/datasets/Sh
 
 # Define flags / Command Line Args
 FLAGS = flags.FLAGS
-flags.DEFINE_string("path", None, "Number of features in record")
+flags.DEFINE_string("path", None, "Path to the ShipRSImageNet dataset")
 flags.DEFINE_integer("level", 3, "Level of category specification")
 flags.DEFINE_bool("debug", False, "Set logging level to debug")
   

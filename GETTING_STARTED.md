@@ -59,6 +59,12 @@ python train_net.py \
 ```
 For more options, see `python train_net.py -h`.
 
+To run ShipRSImageNet, use
+```
+python train_net.py \
+  --config-file configs/shipRS/maskformer2_R50_bs16_50ep.yaml \
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 8 SOLVER.BASE_LR 0.001
+```
 
 ### Video instance segmentation
 Please use `demo_video/demo.py` for video instance segmentation demo and `train_net_video.py` to train
