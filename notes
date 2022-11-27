@@ -1,0 +1,25 @@
+To create jobs, copy all necessary files to /zooper2/$USERNAME and write a script to run the task(s) that you want to run. 
+
+When you're ready to run the script run sbatch /zooper2/$USERNAME/SCRIPT.sh and SLURM (our job manager) will give you a job id. You can check on your job by running scontrol show job ID or scontrol show jobs to show all jobs. 
+
+## FIGURE OUT HOW TO MAKE THE IMAGE AND CONTAINER
+
+docker build --tag $IMAGE-NAME$ .
+
++---------------------------------------------------------
+To get into kahan from kahanctrl:
+
+srun --nodes=1-1 --gres=gpu:1 --mem 20G --pty bash
+
++---------------------------------------------------------
+To get into bash of the container while in kahan:
+
+podman run -it --rm --shm-size=16G --mount=type=bind,source=/zooper2/kapouranis-lee/final-dl,destination=/final-dl localhost/mask2former
+
++---------------------------------------------------------
+To run training ShipRSImageNet, use:
+
+python train_net.py \
+  --config-file configs/shipRS/maskformer2_R50_bs16_50ep.yaml \
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 8 SOLVER.BASE_LR 0.001 SOLVER.MAX_ITER 3000
+
