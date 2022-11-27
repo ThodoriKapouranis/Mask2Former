@@ -44,7 +44,7 @@ if __name__ == "__main__":
   cfg = get_cfg()
   cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
   cfg.DATASETS.TRAIN = ("ship_train",)
-  cfg.DATASETS.TEST = ("ship_val")
+  cfg.DATASETS.TEST = ("ship_val",)
   cfg.DATALOADER.NUM_WORKERS = 0
   cfg.MODEL.WEIGHTS = "detectron2://COCO-Detection/faster_rcnn_R_50_FPN_3x/137849458/model_final_280758.pkl"  # Let training initialize from model zoo
   cfg.SOLVER.IMS_PER_BATCH = 2
@@ -52,9 +52,9 @@ if __name__ == "__main__":
   cfg.SOLVER.MAX_ITER = 300    # 300 iterations seems good enough for this toy dataset; you may need to train longer for a practical dataset
   cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
   cfg.MODEL.ROI_HEADS.NUM_CLASSES = 50
+  cfg.TEST.EVAL_PERIOD = 100
 
   os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
   trainer = DefaultTrainer(cfg) 
   trainer.resume_or_load(resume=False)
   trainer.train()
-  trainer.test()
