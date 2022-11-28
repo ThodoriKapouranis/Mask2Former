@@ -65,6 +65,8 @@ class Trainer(DefaultTrainer):
     Extension of the Trainer class adapted to MaskFormer.
     """
 
+    # Evaluator for our shipRS dataset does not exist
+    # we are using COCO's evaluator, but that gives us 0.00 AP, issue??
     @classmethod
     def build_evaluator(cls, cfg, dataset_name, output_folder=None):
         """
