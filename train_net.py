@@ -314,7 +314,15 @@ def main(args):
 		f'{dataset}/annotations/val.json',
 		f'{dataset}/images'
 	)
- 
+    
+        register_coco_instances(
+		"ship_small", 
+		{}, 
+		f'{dataset}/annotations/small.json',
+		f'{dataset}/images'
+	)
+    os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+    
     cfg = setup(args)
 
     if args.eval_only:

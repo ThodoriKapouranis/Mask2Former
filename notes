@@ -3,17 +3,27 @@ docker build --tag $IMAGE-NAME$ .
 +---------------------------------------------------------
 To get into kahan from kahanctrl:
 
-srun --nodes=1-1 --gres=gpu:1 --mem 20G --pty bash
+srun --nodes=1-1 --gres=gpu:titanrtx:1 --mem 20G --pty bash
 
 +---------------------------------------------------------
 To get into bash of the container while in kahan:
 
-podman run -it --rm --shm-size=16G --mount=type=bind,source=/zooper2/kapouranis-lee/final-dl,destination=/final-dl localhost/mask2former
+podman run -it --rm --shm-size=G --mount=type=bind,source=/zooper2/kapouranis-lee/final-dl,destination=/final-dl localhost/mask2former
 
 +---------------------------------------------------------
 To run training ShipRSImageNet, use:
 
 python train_net.py \
   --config-file configs/shipRS/maskformer2_R50_bs16_50ep.yaml \
-  --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.001 SOLVER.MAX_ITER 3000
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.01 SOLVER.MAX_ITER 1000
 
+
+# Troubleshooting
+python train_net.py \
+  --config-file configs/shipRS/maskformer2_R50_bs16_50ep.yaml \
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0025 SOLVER.MAX_ITER 1000 \
+  DATASETS.TRAIN '("ship_train",)' DATASETS.TEST '("ship_val",)' 
+  MODEL.MASK_FORMER.TRAIN_NUM_POINTS 4096 \
+  MODEL.MASK_FORMER.DIM_FEEDFORWARD 1028 \
+  MODEL.SEM_SEG_HEAD.CONVS_DIM 64 \
+  MODEL.SEM_SEG_HEAD.MASK_DIM 64
