@@ -315,7 +315,7 @@ def main(args):
 		f'{dataset}/images'
 	)
     
-        register_coco_instances(
+    register_coco_instances(
 		"ship_small", 
 		{}, 
 		f'{dataset}/annotations/small.json',
