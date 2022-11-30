@@ -1,4 +1,4 @@
-_BASE_: Base-COCO-InstanceSegmentation.yaml
+_BASE_: Base-SHIP-InstanceSegmentation.yaml
 MODEL:
   META_ARCHITECTURE: "MaskFormer"
   SEM_SEG_HEAD:
